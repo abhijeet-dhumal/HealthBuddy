@@ -1,0 +1,46 @@
+{% extends 'account/patient_base.html' %}
+
+
+{% block body %}
+{% load static %}
+<div class="container" style="justify-content: center;align-items: center;">
+
+        <span style="font-size:28px;">Appointments : </span>
+        {% if not doctor %}
+            <a href="{% url 'appointment-create' %}"><button class="btn btn-primary btn-sm mx-3">Create</button></a>
+        {% endif %}
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Doctor name</th>
+                    <th scope="col">Slot(By doctor user)</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Is paid</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% if details %}
+                {% for detail in details %}
+                <tr>
+                    <td>{{detail.user}}</td>
+                    <td>{{detail.slot}}</td>
+                    <td>{{detail.is_accepted}}</td>
+                    <td>{{detail.is_paid}}</td>
+                    {% if not doctor %}
+                            <th><a href="{% url 'appointment-update' detail.id %}"><button class="btn btn-primary btn-sm mx-3">Update</button></a></th>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td>No records are found !!!</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock %}

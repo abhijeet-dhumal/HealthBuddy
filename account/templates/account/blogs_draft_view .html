@@ -1,0 +1,64 @@
+{% extends 'account/patient_base.html' %}
+
+
+{% block body %}
+{% load static %}
+<div class="container-fluid" style="justify-content: center;align-items: center;">
+    <div class="container" style="padding:5px;">
+        <div class="container">
+            <div class="container-fluid header" style="align-items: center;">
+                <span style="font-size: 26px;">Blogs</span>
+                {% if doctor %}
+                <a href="{% url 'blog-create' %}"><button class="btn btn-primary btn-sm mx-3">Create</button></a>
+                {% endif %}
+                <!-- <a href="{% url 'usernames' %}"
+                    style="border:1px solid grey;padding:5px;float:right;margin-right:10%;margin-top: -7vh;"><span>Back</span></a> -->
+
+                <hr>
+                <form method="get">
+                    {{myfilter.form}}
+                    <button class="btn btn-sm btn-outline-secondary col-3 mt-1 mb-2 mx-3" type="submit"
+                        style="width:100px;">Search</a>
+                </form>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">image</th>
+                        <th scope="col">Posted by</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Summary</th>
+                        <th scope="col">Published_on</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for detail in blogdetail %}
+                    <tr>
+                        <th scope="row">{{detail.id}}</th>
+                        <!-- <th scope="row">{{detail.image}}</th> -->
+
+                        <th><img src="/media/{{detail.image}}" alt="Profile_pic"
+                                style="max-width:10vw;border:1px solid grey;padding:5px;"></th>
+
+                        <th scope="row">{{detail.posted_by}}</th>
+                        <th scope="row">{{detail.category}}</th>
+                        <th scope="row">{{detail.title}}</th>
+                        <th scope="row">{{detail.post}}</th>
+                        <th scope="row">{{ detail.publish_on}}</th>
+                        <th scope="row"><a href="{% url 'blog-update' detail.id %}"><button class="btn btn-primary btn-sm mx-3">Update</button></a></th>
+
+
+
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

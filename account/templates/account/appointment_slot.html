@@ -1,0 +1,59 @@
+{% extends 'account/base.html' %}
+
+
+{% block body %}
+{% load static %}
+<div class="container-fluid" style="justify-content: center;align-items: center;">
+    <div class="container" style="padding:5px;">
+        <div class="container">
+            <div class="container-fluid header" style="align-items: center;">
+                <span style="font-size: 26px;">Appointment slots</span>
+                {% if doctor %}
+                <a href="{% url 'appointment_slot-create' %}"><button class="btn btn-primary btn-sm mx-3">Create</button></a>
+                {% endif %}
+                
+                <!-- <a href="{% url 'usernames' %}"
+                    style="border:1px solid grey;padding:5px;float:right;margin-right:10%;margin-top: -7vh;"><span>Back</span></a> -->
+
+                <hr>
+                <!-- <form method="get">
+                    {{myfilter.form}}
+                    <button class="btn btn-sm btn-outline-secondary col-3 mt-1 mb-2 mx-3" type="submit"
+                        style="width:100px;">Search</a>
+                </form> -->
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>               
+                        <th scope="col">Date</th>               
+                        <th scope="col">Is_available</th>               
+                        <th scope="col">Start_time</th>               
+                        <th scope="col">End_time</th>               
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for object in details %}
+                    <tr>
+                        <th scope="col">{{object.id}}</th>               
+                        <th scope="col">{{object.date}}</th>               
+                        <th scope="col">{{object.is_available}}</th>               
+                        <th scope="col">{{object.start_time}}</th>               
+                        <th scope="col">{{object.end_time}}</th>  
+                        {% if doctor %}
+                        <th><a href="{% url 'appointment_slot-update' object.id %}"><button class="btn btn-primary btn-sm mx-3">Update</button></a></th>
+                        {% endif %}
+                        
+                    </tr>
+                    {% endfor %}             
+                    
+                    
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
