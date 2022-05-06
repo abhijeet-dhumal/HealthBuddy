@@ -1,10 +1,10 @@
-## Duonut Backend
+## HealthBuddy Backend
 
 ## Development Setup
 
 ### Local Setup
 
-- `git clone https://github.com/banao-tech/duonut-back.git`
+- `git clone https://github.com/abhijeet-dhumal/healthbuddy.git`
 
 - `cd duonut-back`
 
@@ -47,6 +47,3 @@ DEFAULT_EMAIL_TO=""
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY=""
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET=""
 ```
-
-## API Documentation
-- `http://localhost:8000/docs`
