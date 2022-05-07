@@ -1,12 +1,12 @@
-{% extends 'account/doctor_base.html' %}
+{% extends 'account/home.html' %}
 
 
 {% block body %}
 {% load static %}
-<div class="container-fluid my-3" style="justify-content: center;align-items: center;">
+<section class="home" style="justify-content: center;align-items: center;">
     <div class="container" style="width:50vw;padding:30px;border:1px solid #aaa;">
         <div class="container">
-            <div class="container-fluid header" style="align-items: center;">
+            <div class="container-fluid" style="align-items: center;">
                 <h3>Blog form</h3>
                 <hr>
             </div>
@@ -29,12 +29,12 @@
                 {% endif %}
 
                 {{form.as_p}}
-                <p><button type="submit">Submit</button></p>
+                <p><button type="submit" class="btn my-0">Submit</button></p>
 
             </form>
         </div>
 
     </div>
-</div>
+</section>>
 
 {% endblock %}

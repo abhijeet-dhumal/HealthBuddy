@@ -1,9 +1,9 @@
-{% extends 'account/patient_base.html' %}
+{% extends 'account/home.html' %}
 
 
 {% block body %}
 {% load static %}
-<div class="container" style="justify-content: center;align-items: center;">
+<section class="home" style="justify-content: center;align-items: center;">
 
         <span style="font-size:28px;">Appointments : </span>
         {% if not doctor %}
@@ -42,5 +42,5 @@
         </table>
     </div>
 
-</div>
+</section>
 {% endblock %}

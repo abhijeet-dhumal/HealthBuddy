@@ -80,7 +80,7 @@ from django.utils import timezone
 class Blog(TimeStampedModel):
     category = models.CharField(max_length=50, choices=BLOG_CATEGORY, blank=True, null=True)
     title = models.CharField(max_length=1024, blank=True, null=True)
-    post = models.TextField(blank=True, null=True)
+    text = models.CharField(max_length=1024, blank=True, null=True)
     image = models.ImageField(blank=True, null=True, upload_to='images/blog/%Y%m%d')
     publish_on = models.DateTimeField(default=timezone.now, null=True, blank=True)
     posted_by = models.ForeignKey(User, on_delete=models.DO_NOTHING)
@@ -144,3 +144,24 @@ class Appointment(models.Model):
             notifications_objs.save()
         
         super(Appointment,self).save(*args,**kwargs)
+
+class Review(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    stars=models.IntegerField(default=0)
+    comment =models.CharField(max_length=50)
+    feedback =models.CharField(max_length=100,null=True, blank=True)
+    posted_on= models.DateTimeField(blank=True,auto_now_add=True)
+
+    def __str__(self):
+        return "Review: " + str(self.user)
+
+class Contact(models.Model):
+    name = models.CharField(max_length=50,null=True,blank=True)
+    phone=models.CharField(max_length=50)
+    email=models.EmailField(max_length=50)
+    message =models.CharField(max_length=100)
+    feedback =models.CharField(max_length=100,null=True, blank=True)
+    posted_on= models.DateTimeField(blank=True,auto_now_add=True)
+
+    def __str__(self):
+        return "Contact: " + str(self.name)
