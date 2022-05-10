@@ -283,14 +283,21 @@ def usernames(request):
 # @login_required
 # @allowed_users(allowed_roles=['Admin','Doctor','Patient'])
 def first_page(request):
-    pk=request.user.id
-    userdetails=User.objects.get(id=pk)
-    current_user=request.user
-    boolean=True
-    if User.objects.get(id=current_user.id).user_type=='Patient':
-        boolean=False
-    context={"userdetails":userdetails,'doctor':boolean}
-    return render(request,"account/profile.html",context)
+    try:
+        pk=request.user.id
+        userdetails=User.objects.get(id=pk)
+        current_user=request.user
+        boolean=True
+        if User.objects.get(id=current_user.id).user_type=='Patient':
+            boolean=False
+        context={"userdetails":userdetails,'doctor':boolean}
+        return render(request,"account/profile.html",context)
+        
+    except Exception as e:
+        print(e)
+        messages.warning(request, f'Something is wrong here, credentials might not be filled completely !!!')
+        return render(request,"account/home.html")
+
 
 @login_required
 @allowed_users(allowed_roles=['Admin','Doctor','Patient'])

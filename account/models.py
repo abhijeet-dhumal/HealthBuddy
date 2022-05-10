@@ -41,19 +41,19 @@ class UserManager(BaseUserManager):
 
 class User(AbstractUser):
     username = None
-    email = models.EmailField(unique=True)
-    name=models.CharField(max_length=200,default='User')
-    user_type = models.CharField(
+    email = models.EmailField("Email* ",unique=True)
+    name=models.CharField("UserName* ",max_length=200,default='User')
+    user_type = models.CharField("UserType* ",
         max_length=520, blank=True, choices=CATEGORY, default='Patient')
-    phone = models.CharField(max_length=200, null=True)
-    image = models.ImageField(upload_to='images/users/%Y%m%d',null=True, blank=True)
-    age=models.IntegerField(default=1)
-    specialization = models.CharField("Area of Expertise(For doctor user only)", max_length=100, blank=True)
-    address_line1 = models.CharField("Address_Line1", max_length=100, blank=True)
-    city = models.CharField("City", max_length=50, blank=True)
-    state = models.CharField("State", max_length=50, blank=True)
-    country = models.CharField("Country", max_length=50, blank=True)
-    pincode = models.CharField("Pincode", max_length=50, blank=True)
+    phone = models.CharField("Contact no. ",max_length=200, null=True)
+    image = models.ImageField("Profile Image ",upload_to='images/users/%Y%m%d',null=True, blank=True)
+    age=models.IntegerField("Age ",default=1)
+    specialization = models.CharField("Area of Expertise(For doctor user only) ", max_length=100, blank=True)
+    address_line1 = models.CharField("Address_Line1 ", max_length=100, blank=True)
+    city = models.CharField("City ", max_length=50, blank=True)
+    state = models.CharField("State ", max_length=50, blank=True)
+    country = models.CharField("Country ", max_length=50, blank=True)
+    pincode = models.CharField("Pincode ", max_length=50, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
     USERNAME_FIELD = 'email'
