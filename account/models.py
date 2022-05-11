@@ -46,7 +46,7 @@ class User(AbstractUser):
     user_type = models.CharField("UserType* ",
         max_length=520, blank=True, choices=CATEGORY, default='Patient')
     phone = models.CharField("Contact no. ",max_length=200, null=True)
-    image = models.ImageField("Profile Image ",upload_to='images/users/%Y%m%d',null=True, blank=True)
+    image = models.ImageField("Profile Image ",upload_to='app/images/users/%Y%m%d',null=True, blank=True)
     age=models.IntegerField("Age ",default=1)
     specialization = models.CharField("Area of Expertise(For doctor user only) ", max_length=100, blank=True)
     address_line1 = models.CharField("Address_Line1 ", max_length=100, blank=True)
@@ -81,7 +81,7 @@ class Blog(TimeStampedModel):
     category = models.CharField(max_length=50, choices=BLOG_CATEGORY, blank=True, null=True)
     title = models.CharField(max_length=1024, blank=True, null=True)
     text = models.CharField(max_length=1024, blank=True, null=True)
-    image = models.ImageField(blank=True, null=True, upload_to='images/blog/%Y%m%d')
+    image = models.ImageField(blank=True, null=True, upload_to='app/images/blog/%Y%m%d')
     publish_on = models.DateTimeField(default=timezone.now, null=True, blank=True)
     posted_by = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     draft=models.BooleanField(default=False)
