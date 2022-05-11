@@ -1,10 +1,10 @@
-{% extends 'account/base.html' %}
+{% extends 'account/home.html' %}
 
 
 {% block body %}
 {% load static %}
-<div class="container-fluid" style="align-items: center;justify-content: center;">
-    <div class="header">
+<section class="home">
+    <div class="">
         <span style="font-size: 2rem;">User updation form </span>
         <!-- <span><a href="{% url 'usernames' %}">Back</a></span> -->
         <hr>
@@ -37,9 +37,9 @@
                     {{form.as_p}}
                 </div>
             </div>
-            <input type="Submit" value="Submit" />
+            <input type="Submit" class="btn my-0" value="Submit" />
         </form>
     </div>
 
-</div>
+</section>>
 {% endblock %}

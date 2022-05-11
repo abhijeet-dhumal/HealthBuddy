@@ -1,38 +1,52 @@
-{% extends 'account/base.html' %}
+{% extends 'account/home.html' %}
 
 
 {% block body %}
 {% load static %}
-<div class="container-fluid" style="justify-content: center;align-items: center;">
+<section class="home" style="justify-content: center;align-items: center;">
     <div class="container" style="padding:5px;">
-        <div class="container">
-            <div class="container-fluid header" style="align-items: center;">
-                <span style="font-size: 26px;">Notifications</span>
-                
-                <!-- <a href="{% url 'usernames' %}"
-                    style="border:1px solid grey;padding:5px;float:right;margin-right:10%;margin-top: -7vh;"><span>Back</span></a> -->
 
-                <hr>
-                <!-- <form method="get">
-                    {{myfilter.form}}
-                    <button class="btn btn-sm btn-outline-secondary col-3 mt-1 mb-2 mx-3" type="submit"
-                        style="width:100px;">Search</a>
-                </form> -->
+        <section class="blogs" id="blogs">
+
+            <h1 class="heading"> Notification<span>s</span> </h1>
+
+            <hr>
+            <div class="box-container">
+
+                {% if object_list %}
+                {% for detail in object_list %}
+
+                <div class="box">
+
+                    <div class="content" style="align-items:center;text-align:center;">
+
+                        <div class="icon d-flex">
+                            <p class="m-0 p-0"><a href=""><i class="fas fa-user"></i></i>{{detail.id}}
+                                </a>
+                            </p><br>
+                            <p class="m-0 p-0"><a href=""><i class="fas fa-money-check-alt"></i>{{detail.text}}</a>
+                            </p>
+                            <br>
+
+                        </div>
+
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="container-fluid" style="align-items: center;text-align: center;">
+                    <h3>No records found for this user !!! </h3>
+                </div>>
+                {% endif %}
+
+
+
             </div>
-            <table class="table">
-                <thead>
-                    {% for object in object_list %}
-                    <tr>
-                        <th scope="col">{{object.id}}</th>               
-                        <th scope="col">{{object.text}}</th>               
-                    </tr>
-                    {% endfor %}             
-                </thead>
-
-            </table>
-        </div>
+        </section>
 
     </div>
-</div>
+
+</section>
+
 
 {% endblock %}

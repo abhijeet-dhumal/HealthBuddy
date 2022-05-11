@@ -1,12 +1,12 @@
-{% extends 'account/doctor_base.html' %}
+{% extends 'account/home.html' %}
 
 
 {% block body %}
 {% load static %}
-<div class="container-fluid" style="justify-content: center;align-items: center;">
+<section class="home" style="justify-content: center;align-items: center;">
     <div class="container">
         <div class="container">
-            <div class="container-fluid header" style="align-items: center;">
+            <div class="container-fluid" style="align-items: center;">
                 <h3>Drafts</h3>
                 <!-- <span>{{current_user}}</span> -->
                 <!-- <a href="{% url 'usernames' %}"
@@ -58,5 +58,5 @@
         </div>
 
     </div>
-</div>
+</section>
 {% endblock %}

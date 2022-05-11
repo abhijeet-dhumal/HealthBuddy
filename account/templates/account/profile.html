@@ -1,17 +1,17 @@
-{% extends 'account/doctor_base.html' %}
+{% extends 'account/index.html' %}
 
 
 {% block body %}
 {% load static %}
-<div class="container" style="justify-content: center;align-items: center;">
+<section class="home">
 
 
-        <div class="container-fluid header" style="align-items: center;">
+        <div class="container-fluid" style="align-items: center;">
             <span style="font-size: 26px;">Profile</span>
                 {% if doctor %}
-                <a href="{% url 'appointment_slots' %}"><button class="btn btn-primary btn-sm mx-3">Appointment_slots</button></a>
+                <a href="{% url 'appointment_slots' %}"><button class="btn my-0">Appointment_slots</button></a>
                 {% else %}
-                <a href="{% url 'appointments' %}"><button class="btn btn-primary btn-sm mx-3">Appointments</button></a>
+                <a href="{% url 'appointments' %}"><button class="btn my-0">Appointments</button></a>
                 {% endif %}
             <!-- <a href="{% url 'usernames' %}"
                     style="border:1px solid grey;padding:5px;float:right;margin-right:10%;margin-top: -7vh;"><span>Back</span></a> -->
@@ -23,44 +23,48 @@
                         style="width:100px;">Search</a>
                 </form> -->
         </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">User_type</th>
-
-                    <th scope="col">Phone</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Date_registered</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">{{userdetails.id}}</th>
-                    <!-- <th scope="row">{{detail.image}}</th> -->
-                    <th>
-                    
-                    <img src="{{userdetails.image.url}}" alt="Profile_pic"
-                        style="width:10vw;border:1px solid grey;padding:5px;">
-                   
-                    </th>
+        <!-- blogs section starts  -->
+            
+        <section class="blogs" id="blogs">
+            <div class="box-container">
                 
-                    <th scope="row">{{userdetails.email}}</th>
-                    <th scope="row">{{userdetails.user_type}}</th>
-                    <th scope="row">{{userdetails.phone}}</th>
-                    <th scope="row">{{userdetails.address_line1}}, {{userdetails.city}}, {{userdetails.state}},
-                        {{userdetails.country}}, {{userdetails.pincode}} </th>
-                    <th scope="row">{{ userdetails.date_created}}</th>
-                    <th scope="row"><a href="{% url 'users-update' userdetails.id %}"><button class="btn btn-sm btn-primary">Update</button></a></th>
+                <div class="box">
+                    <div class="image">
+                        <img src="{{userdetails.image.url}}" alt="">
+                    </div>
 
-                </tr>
+                    <div class="content" style="align-items:center;text-align:center;">
+                        <div class="icon">
+                            <p class="m-0 p-0"><a href="#">  <i class="fas fa-user"></i></i> {{userdetails.email}}
+                                </a>
+                            </p><br>
+                            <p class="m-0 p-0"><a href="#"><i class="fas fa-phone"></i></i>{{userdetails.phone}}</a></p><br>
+                            <p class="m-0 p-0"><a href="#"> Role : {{userdetails.user_type}}</a>
+                            </p>
+                            <br>
+                            <p class="m-0 p-0"><a href="#"> Address: {{userdetails.address_line1}}, {{userdetails.city}}, {{userdetails.state}},
+                                {{userdetails.country}}, {{userdetails.pincode}} </a>
+                            </p>
+                            <br>
+                            <p class="m-0 p-0"><a href="#"> <i class="fas fa-calendar"></i>Registered_at :{{userdetails.date_created}} </a></p>
+                            <br>
+                            
+                        </div>
+      
+                        <div class="">
+                            {% if doctor %}
+                            <a href="{% url 'users-update' userdetails.id %}" class="btn"> Update <span class="fas fa-chevron-right"></span> </a>
+                            {% endif %}
+                            <a href="#" class="btn mx-2"> learn more <span class="fas fa-chevron-right"></span> </a>
+                        </div>
+                    </div>
+                </div>
 
-            </tbody>
-        </table>
 
-</div>
+            </div>
+        </section>
+
+
+</section>
 
 {% endblock %}

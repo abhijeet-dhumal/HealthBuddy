@@ -21,8 +21,38 @@ from django.contrib import messages
 
 
 def home(request):
-    context={}
-    return render(request,"account/home.html",context)
+
+    users_count=User.objects.all().count()
+    doctor_count=User.objects.filter(user_type='Doctor').count()
+    blog_count=Blog.objects.all().count()
+    appointment_count=Appointment.objects.all().count()
+    boolean=request.user.is_authenticated
+
+    doctors=User.objects.filter(user_type='Doctor')[0:6]
+
+
+    reviews=Review.objects.all()[0:6]
+    contactform = ContactForm(request.POST)
+    if request.method =='POST':
+        print("came")
+        name=request.POST.get('name')
+        print(contactform)
+        if contactform.is_valid():
+            print("Not vaid")
+            contactform.save()
+            context={'boolean':boolean,'users_count':users_count,'doctor_count':doctor_count,'blog_count':blog_count,'appointment_count':appointment_count,'doctors':doctors,'reviews':reviews,'contactform':contactform}
+            messages.success(request, f'Entered contact data is saved for user {name}')
+
+            return render(request,"account/home.html",context)
+
+        else:
+            messages.warning(request, f'Entered contact data is not saved for user {name}')
+
+            context={'boolean':boolean,'users_count':users_count,'doctor_count':doctor_count,'blog_count':blog_count,'appointment_count':appointment_count,'doctors':doctors,'reviews':reviews,'contactform':contactform}
+            return render(request,"account/home.html",context)
+    else:
+        context={'boolean':boolean,'users_count':users_count,'doctor_count':doctor_count,'blog_count':blog_count,'appointment_count':appointment_count,'doctors':doctors,'reviews':reviews,'contactform':contactform}
+        return render(request,"account/home.html",context)
 
 def home1(request):
     context={'current_user':request.user}
@@ -40,7 +70,7 @@ def home1(request):
 
 # import datetime
 
-# try:
+# tr
 #     import argparse
 #     flags = tools.argparser.parse_args([])
 # except ImportError:
@@ -119,7 +149,7 @@ def LoginForm(request):
             # user = authenticate(request, email= email , password = password)     
             if user is not None:
                 login(request, user)
-                return redirect('home_page')
+                return redirect('home')
             else:
                 return HttpResponse("<h1>Registered email or Password is incorrect !!!</h1>")
               
@@ -141,7 +171,6 @@ def registerPage(request):
             form1.save()
             user = form1.save()
             user.refresh_from_db()  # load the profile instance created by the signal
-            profile = User.objects.create(name=user.name)
             # doctor_reg_form = UserForm(request.POST,request.FILES,instance=profile)
             # doctor_reg_form.full_clean()
             # doctor_reg_form.save()
@@ -254,14 +283,21 @@ def usernames(request):
 # @login_required
 # @allowed_users(allowed_roles=['Admin','Doctor','Patient'])
 def first_page(request):
-    pk=request.user.id
-    userdetails=User.objects.get(id=pk)
-    current_user=request.user
-    boolean=True
-    if User.objects.get(id=current_user.id).user_type=='Patient':
-        boolean=False
-    context={"userdetails":userdetails,'doctor':boolean}
-    return render(request,"account/profile.html",context)
+    try:
+        pk=request.user.id
+        userdetails=User.objects.get(id=pk)
+        current_user=request.user
+        boolean=True
+        if User.objects.get(id=current_user.id).user_type=='Patient':
+            boolean=False
+        context={"userdetails":userdetails,'doctor':boolean}
+        return render(request,"account/profile.html",context)
+        
+    except Exception as e:
+        print(e)
+        messages.warning(request, f'Something is wrong here, credentials might not be filled completely !!!')
+        return render(request,"account/home.html")
+
 
 @login_required
 @allowed_users(allowed_roles=['Admin','Doctor','Patient'])

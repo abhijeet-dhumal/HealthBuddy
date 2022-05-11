@@ -1,5 +1,11 @@
+
 from django.http import HttpResponse
 from django.shortcuts import redirect
+
+from .decorators import *
+from django.contrib import messages
+
+from django.shortcuts import render 
 
 def unauthenticated_user(view_func):
     def wrapper_func(request, *args, **kwargs):
@@ -21,7 +27,8 @@ def allowed_users(allowed_roles=[]):
                 print('working',allowed_roles)
                 return view_func(request,*args,**kwargs)
             else:
-                return HttpResponse('<h3>you are not authorized to view this page !!!</h3>')
+                messages.warning(request, f'User is not authorised to access this page !!!')
+                return render(request,"account/home.html")
                 # return redirect('home')
         return wrapper_func
     return decorator

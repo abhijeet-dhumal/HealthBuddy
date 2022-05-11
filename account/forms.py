@@ -2,7 +2,7 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.models import User
-from .models import Appointment, AppointmentSlot, Blog, User
+from .models import *
 from django.contrib.auth import password_validation
 
 class UserRegisterForm(UserCreationForm):
@@ -13,7 +13,7 @@ class UserRegisterForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['first_name','last_name', 'email','user_type','phone','image','specialization','address_line1','city', 'state', 'country','pincode']
+        fields = ['first_name','last_name', 'email','user_type','name','age','phone','image','specialization','address_line1','city', 'state', 'country','pincode']
 
 from datetime import date
 class UserForm(forms.ModelForm):            
@@ -76,4 +76,10 @@ class AppointmentSlotForm(forms.ModelForm):
             'Starttime_of_appointment': forms.TextInput(
                 attrs={'placeholder': 'YYYY-MM-DD HH:MM:SS'}),
         }
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = '__all__'
+       
 
