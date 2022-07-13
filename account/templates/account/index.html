@@ -40,7 +40,7 @@
             <a href="{% url 'blogs_view' %}">blogs</a>
             <a href="{% url 'first_page' %}">Profile</a>
 	    <a class="fa fa-arrow-left btn my-0" href="{{request.META.HTTP_REFERER}}"></a>
-	    {% if boolean %}
+	    {% if not boolean %}
             <a class="fas fa-bell btn my-0" href="{% url 'notifications' %}"></a>
             <a class="fas fa-sign-out-alt btn my-0" href="{% url 'logoutuser' %}"></a>
             {% endif %}
